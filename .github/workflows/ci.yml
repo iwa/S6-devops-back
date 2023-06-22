@@ -55,6 +55,7 @@ jobs:
 
   notification:
     runs-on: ubuntu-latest
+    environment: prod
     needs: [build, dockerize]
 
     steps:
