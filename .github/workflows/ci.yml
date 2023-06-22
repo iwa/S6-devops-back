@@ -53,14 +53,12 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ghcr.io/iwa/devops-back:latest
 
-  discord_notification:
+  notification:
     runs-on: ubuntu-latest
     needs: [build, dockerize]
 
     steps:
-    - name: Discord Notification
-      uses: appleboy/discord-action@master
+    - name: Trigger webhook
+      uses: jasongitmail/fast-webhook@v1.1.4
       with:
-        webhook_id: ${{ secrets.WEBHOOK_ID }}
-        webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-        text: "La construction et la dockerisation de l'application ont réussi !"
+        url: ${{ secrets.TRIGGER_WEBHOOK }}
