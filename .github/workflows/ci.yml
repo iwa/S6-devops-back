@@ -50,8 +50,8 @@ jobs:
       uses: docker/build-push-action@v4.1.1
       with:
         context: .
-        push: true
-        tags: iwa/devops-back:latest
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ghcr.io/iwa/devops-back:latest
 
   discord_notification:
     runs-on: ubuntu-latest
